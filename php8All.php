@@ -565,6 +565,34 @@ class Person
 
 sayHello(new Person());
 
+New String Functions
+Di PHP 8, terdapat beberapa function untuk memanipulasi string
+https://wiki.php.net/rfc/str_contains
+https://wiki.php.net/rfc/add_str_starts_with_and_ends_with_functions
+
+String Function
+ Function
+Keterangan
+str_contains($string, $contains) : bool
+Mengecek apakah $string mengandung $contains
+str_starts_with($string, $value) : bool
+Mengecek apakah $string memiliki awal $value
+str_ends_with($string, $value) : bool
+Mengececk apakah $string memiliki akhir $value
+
+Kode : New String Function
+var_dump(str_contains("Eko Kurniawan", "Eko"));
+var_dump(str_contains("Eko Kurniawan", "Kurniawan"));
+var_dump(str_contains("Eko Kurniawan", "Joko"));
+
+var_dump(str_starts_with("Eko Kurniawan", "Eko"));
+var_dump(str_starts_with("Eko Kurniawan", "Kurniawan"));
+var_dump(str_starts_with("Eko Kurniawan", "Joko"));
+
+var_dump(str_ends_with("Eko Kurniawan", "Eko"));
+var_dump(str_ends_with("Eko Kurniawan", "Kurniawan"));
+var_dump(str_ends_with("Eko Kurniawan", "Joko"));
+
 
 
 
