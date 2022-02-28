@@ -458,6 +458,37 @@ var_dump(testMixed("Eko"));
 var_dump(testMixed(1));
 var_dump(testMixed(new stdClass()));
 
+Comma di Parameter List
+Ini adalah salah satu fitur sederhana, tapi bermanfaat
+Di PHP 8, kita sekarang bisa menambahkan karakter koma di akhir parameter list, seperti ketika memanggil function, membuat array dan lain-lain
+https://wiki.php.net/rfc/trailing_comma_in_parameter_list 
+https://wiki.php.net/rfc/trailing_comma_in_closure_use_list 
+
+Kode : Comma di Argument 
+function sayHello(string $first, string $last)
+{
+}
+
+function sum(int ...$values)
+{
+}
+
+sayHello(
+    "Eko",
+    "Eko",
+);
+
+Kode : Comma di Array 
+$array = [
+    "first" => "Eko",
+    "middle" => "Eko",
+    "last" => "Eko",
+    "address" => "Eko",
+    "country" => "Eko",
+    "bday" => "Eko",
+];
+
+
 
 
 
