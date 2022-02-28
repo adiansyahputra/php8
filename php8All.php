@@ -488,6 +488,26 @@ $array = [
     "bday" => "Eko",
 ];
 
+Non-Capturing Catches
+Saat terjadi error di PHP, biasanya kita akan menggunakan try catch
+Lalu dalam catch kita akan menangkap error dan menyimpannya dalam variable exception
+Walaupun sebenarnya tidak kita gunakan, kita tetap harus membuat variable exception nya
+Di PHP 8, sekarang kita tidak wajib membuat variable exception nya jika memang tidak akan menggunakannya
+https://wiki.php.net/rfc/non-capturing_catches 
+
+Kode : Non-Capturing Catches
+function validate(string $value)
+{
+    if (trim($value) == "") {
+        throw new Exception("Invalid string");
+    }
+}
+
+try {
+    validate("   ");
+} catch (Exception) {
+    echo "Invalid" . PHP_EOL;
+}
 
 
 
