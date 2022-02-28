@@ -366,6 +366,72 @@ Opcache akan membuat kode program kita terhindar dari harus melakukan tokenize, 
 JIT, akan membuat hasil kompilasi kita tidak perlu diterjemahkan oleh virtual machine PHP, melainkan langsung dijalankan oleh machine
 JIT di PHP menggunakan library bahasa pemrograman C bernama DynASM, oleh karena itu JIT bisa mentranslate hasil compile opcodes ke instruksi machine
 
+Validation untuk Abstract Function di Trait
+Di PHP 8, sekarang terdapat validasi ketika mengimplementasikan abstract function di class dari trait
+Di PHP 7, saat kita mengubah seperti parameter dan return value nya, hal itu tidak menjadi masalah
+Namun di PHP 8, jika kita mengubah implementasinya dari abstract function nya, maka otomatis akan error
+https://wiki.php.net/rfc/abstract_trait_method_validation 
+
+Kode : Validation di Abstract Function Trait
+trait SampleTrait
+{
+    public abstract function sampleFunction(string $name): string;
+}
+
+class SampleClass
+{
+    use SampleTrait;
+
+    public function sampleFunction(int $name): string
+    {
+    }
+}
+
+Validation di Function Overriding
+Sebelumnya kita tahu bahwa melakukan override dengan mengubah signature function hanya akan menimbulkan warning
+Di PHP 8, hal tersebut sekarang akan menimbulkan error
+Sehingga kita tidak bisa lagi mengubah signature dari function yang kita override, seperti mengubah argument atau mengubah return value
+https://wiki.php.net/rfc/lsp_errors 
+
+Kode : Validation di Function Overriding
+
+class ParentClass
+{
+    public function method(string $name)
+    {
+    }
+}
+
+class ChildClass extends ParentClass
+{
+
+    public function method(int $name)
+    {
+    }
+}
+
+Private Function Overriding
+Di PHP 7, saat kita membuat function, tapi ternyata di parent nya terdapat function dengan nama yang sama, walaupun private, hal itu dianggap overriding
+Padahal sudah jelas bahwa private function tidak bisa diakses oleh turunannya
+Di PHP 8, sekarang private function tidak ada hubungannya lagi dengan child class nya, sehingga kita bebas membuat function dengan nama yang sama walaupun di parent ada function private dengan nama yang sama
+https://wiki.php.net/rfc/inheritance_private_methods 
+
+Kode : Private Function Overriding
+class Manager
+{
+    private function test(): void
+    {
+    }
+}
+
+class VicePresident extends Manager
+{
+
+    public function test(string $name): string
+    {
+        return "VP";
+    }
+}
 
 
 
