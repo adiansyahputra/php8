@@ -148,6 +148,86 @@ function validateLength(ReflectionProperty $property, object $object): void
     }
 }
 
+Constructor Property Promotion
+Kadang kita sering sekali membuat property sekaligus mengisi property tersebut menggunakan constructor
+Sekarang kita bisa otomatis langsung membuat property dengan via constructor
+Fitur ini mirip sekali di bahasa pemrograman seperti Kotlin dan TypeScript
+https://wiki.php.net/rfc/constructor_promotion 
+
+Kode : Property dan Constructor
+class Person
+{
+
+    var string $name;
+    var ?string $address = null;
+    var string $country = "Indonesia";
+
+    function __construct(string $name, ?string $address)
+    {
+        $this->name = $name;
+        $this->address = $address;
+    }
+
+Kode : Constructor Property Promotion
+class Product
+{
+    public function __construct(
+        public string $id,
+        public string $name,
+        public int $price = 0,
+        public int $quantity = 0,
+        private bool $expensive = false
+    ) {
+    }
+}
+
+$product = new Product(id: "1", name: "Mie Ayam", price: 15000);
+var_dump($product);
+
+echo $product->name . PHP_EOL;
+
+Union Types
+PHP adalah bahasa pemrograman yang dynamic
+Kita tahu sebenarnya saat membuat variabel, parameter, argument, return value, sebenarnya di PHP kita tidak wajib menyebutkan tipe datanya, dan PHP bisa berubah-ubah tipe data
+Saat kita tambahkan tipe data, maka secara otomatis PHP akan memastikan tipe data tersebut harus sesuai dengan tipe data yang sudah kita definisikan
+Di PHP 8, ada fitur Union Types, dimana kita bisa menambahkan lebih dari satu tipe data ke property, argument, parameter, atau return value
+Penggunaan Union Types bisa menggunakan tanpa | diikuti dengan tipe data selanjutnya
+https://wiki.php.net/rfc/union_types_v2 
+
+Kode : Union Types di Property
+class Example
+{
+    public string|int|bool|array $data;
+}
+
+$example = new Example();
+$example->data = "Eko";
+$example->data = 100;
+$example->data = true;
+$example->data = [];
+
+Kode : Union Type di Argument
+function sampleFunction(string|array $data): string|array
+{
+    if (is_array($data)) {
+        return ["Array"];
+    } else if (is_string($data)) {
+        return "String";
+    }
+}
+
+Kode : Union Type di Return Value
+function sampleFunction(string|array $data): string|array
+{
+    if (is_array($data)) {
+        return ["Array"];
+    } else if (is_string($data)) {
+        return "String";
+    }
+}
+
+var_dump(sampleFunction("Eko"));
+var_dump(sampleFunction([]));
 
 
 
